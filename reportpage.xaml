@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="GRG_NfcTagWriter.FormReports"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" Loaded="UserControl_loaded"
+             d:DesignHeight="600" d:DesignWidth="800">
+
+	<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+		<Grid Margin="10">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<!-- Connection String Section -->
+				<RowDefinition Height="Auto" />
+				<!-- Query Input Section -->
+				<RowDefinition Height="Auto" />
+				<!-- Export Section -->
+				<RowDefinition Height="*" />
+				<!-- Results Display -->
+			</Grid.RowDefinitions>
+
+			<!-- Connection String Section -->
+			<GroupBox Grid.Row="0" Header="Database Connection" Margin="10">
+				<StackPanel Orientation="Horizontal" Margin="10">
+					<Label Content="Connection String:" FontWeight="SemiBold" FontSize="14"/>
+					<TextBox x:Name="ConnectionStringInputBox" Width="400" Height="25" FontSize="12" Padding="5" />
+					<ComboBox x:Name="DatabaseSelector" Width="100" Height="25" FontSize="12" SelectionChanged="DatabaseSelector_SelectionChanged">
+						<ComboBoxItem Content="MS SQL" />
+						<ComboBoxItem Content="MySQL" />
+					</ComboBox>
+					<Button x:Name="GoButton" Content="Go" Width="60" Height="25" FontSize="12" Click="GoButton_Click"/>
+				</StackPanel>
+			</GroupBox>
+
+			<!-- Query Input Section -->
+			<GroupBox Grid.Row="1" Header="Enter Query" Margin="10">
+				<StackPanel Orientation="Vertical" Margin="10">
+					<TextBox x:Name="QueryTextBox" Height="150" FontSize="12" AcceptsReturn="True" Padding="5" TextWrapping="Wrap" />
+					<StackPanel Orientation="Horizontal" Margin="5,10,0,0">
+						<Button x:Name="ExecuteQueryButton" Content="Execute Query" Width="120" Height="30" Click="ExecuteQuery_Click" />
+						<Button x:Name="ClearQueryButton" Content="Clear" Width="100" Height="30" Click="ClearButton_Click" />
+					</StackPanel>
+				</StackPanel>
+			</GroupBox>
+
+			<!-- Export Section -->
+			<GroupBox Grid.Row="2" Header="Export Options" Margin="10">
+				<StackPanel Orientation="Horizontal" Margin="10">
+					<Label Content="Export As:" FontWeight="SemiBold" FontSize="14"/>
+					<Button x:Name="ExportPDFButton" Content="PDF" Width="80" Height="30" Click="ExportPDFButton_Click"/>
+					<Button x:Name="ExportCSVButton" Content="CSV" Width="80" Height="30" Click="ExportCSVButton_Click"/>
+				</StackPanel>
+			</GroupBox>
+
+			<!-- Results DataGrid -->
+			<GroupBox Grid.Row="3" Header="Results" Margin="10">
+				<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+					<DataGrid x:Name="DataGrid" IsReadOnly="True" AutoGenerateColumns="True" Height="300"/>
+				</ScrollViewer>
+			</GroupBox>
+		</Grid>
+	</ScrollViewer>
+</UserControl>
